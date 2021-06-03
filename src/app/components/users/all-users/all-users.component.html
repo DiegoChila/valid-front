@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="animate__animated animate__fadeIn table_st example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="select">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Seleccionar </mat-header-cell>
+        <mat-cell *matCellDef="let user" data-label="select">
+          <span class="mobile-label">Seleccionar:</span>
+          <div class="info_st">
+            <input type="checkbox" aria-label="Checkbox for following text input" [(ngModel)]="user.select">
+          </div>
+        </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
+        <mat-cell *matCellDef="let user" data-label="name"> 
+          <span class="mobile-label">Nombre:</span>
+          <div class="info_st">{{user.name}}</div>
+        </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="lastname">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </mat-header-cell>
+        <mat-cell *matCellDef="let user" data-label="lastname"> 
+          <span class="mobile-label">Apellido:</span>
+          <div class="info_st">{{user.lastname}}</div>
+        </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="proccess">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Procesado </mat-header-cell>
+        <mat-cell *matCellDef="let user" data-label="process"> 
+          <ng-container *ngIf="user.process; else elseTemplate">
+            <span class="mobile-label">Procesado:</span>
+            <div class="info_st">
+              <i class="fas fa-check-circle"></i> 
+            </div>
+          </ng-container>
+          <ng-template #elseTemplate>
+            <span class="mobile-label">Procesado:</span>
+            <div class="info_st">
+              <i class="fas fa-times-circle"></i> 
+            </div>
+          </ng-template>  
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <div class="mt-5 btn_div_st">
+      <button class="btn btn-success" (click)="changeProcess()">Procesar</button>
+    </div>
+  </div>
+</div>
+<div *ngIf="onLoad" class="load_st">
+  <app-load></app-load>
+</div>
+
